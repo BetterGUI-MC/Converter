@@ -10,15 +10,15 @@
     <version>2.0</version>
   </parent>
 
-  <artifactId>ExampleAddon</artifactId>
+  <artifactId>Converter</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>ExampleAddon</name>
-  <description>An Example addon for BetterGUI</description>
+  <name>Converter</name>
+  <description>Convert menus from other menu plugins</description>
 
   <properties>
-    <project.mainClass>me.hsgamer.bettergui.exampleaddon.ExampleAddon</project.mainClass>
+    <project.mainClass>me.hsgamer.bettergui.converter.Converter</project.mainClass>
   </properties>
 
   <repositories>
