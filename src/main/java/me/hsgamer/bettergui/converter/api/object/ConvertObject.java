@@ -1,7 +1,8 @@
 package me.hsgamer.bettergui.converter.api.object;
 
 import me.hsgamer.bettergui.converter.api.unit.ConvertUnit;
-import me.hsgamer.hscore.common.Pair;
+
+import java.util.Map;
 
 public class ConvertObject {
     private final Object object;
@@ -20,7 +21,7 @@ public class ConvertObject {
         return unit;
     }
 
-    public Pair<String, Object> convert() {
-        return Pair.of(unit.getKey(), unit.getConverter().apply(object));
+    public Map<String, Object> convert() {
+        return unit.getConverter().apply(object);
     }
 }

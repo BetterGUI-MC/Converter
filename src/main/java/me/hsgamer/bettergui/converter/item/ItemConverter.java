@@ -7,4 +7,8 @@ public class ItemConverter extends ConvertSet {
     public void add(ItemStack itemStack, ItemConvertUnit... extraUnits) {
         ItemConvertUnit.getFromItem(itemStack, extraUnits).forEach(this::add);
     }
+
+    public void addSlot(int slot) {
+        add(ItemConvertUnit.Extra.SLOT.getUnit().create(slot));
+    }
 }

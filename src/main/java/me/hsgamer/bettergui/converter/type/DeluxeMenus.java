@@ -2,6 +2,7 @@ package me.hsgamer.bettergui.converter.type;
 
 import me.hsgamer.bettergui.converter.api.converter.ConverterType;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +20,7 @@ public class DeluxeMenus implements ConverterType {
     }
 
     @Override
-    public Optional<Map<String, Object>> convert(String name) {
+    public Optional<Map<String, Object>> convert(String name, Player player) {
         return Optional.empty();
     }
 }

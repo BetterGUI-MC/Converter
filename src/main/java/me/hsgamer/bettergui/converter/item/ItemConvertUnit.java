@@ -2,6 +2,7 @@ package me.hsgamer.bettergui.converter.item;
 
 import me.hsgamer.bettergui.converter.api.object.ConvertObject;
 import me.hsgamer.bettergui.converter.api.unit.ConvertUnit;
+import me.hsgamer.bettergui.converter.api.unit.SimpleConvertUnit;
 import me.hsgamer.hscore.bukkit.item.ItemModifier;
 import me.hsgamer.hscore.bukkit.item.modifier.*;
 import org.bukkit.inventory.ItemStack;
@@ -14,7 +15,7 @@ import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
-public class ItemConvertUnit extends ConvertUnit {
+public class ItemConvertUnit extends SimpleConvertUnit {
     private final Function<ItemStack, Object> itemGetter;
 
     public ItemConvertUnit(int priority, String key, UnaryOperator<Object> converter, Function<ItemStack, Object> itemGetter) {
@@ -86,6 +87,20 @@ public class ItemConvertUnit extends ConvertUnit {
         }
 
         public ItemConvertUnit getUnit() {
+            return unit;
+        }
+    }
+
+    public enum Extra {
+        SLOT(new SimpleConvertUnit("slot"));
+
+        private final ConvertUnit unit;
+
+        Extra(ConvertUnit unit) {
+            this.unit = unit;
+        }
+
+        public ConvertUnit getUnit() {
             return unit;
         }
     }
