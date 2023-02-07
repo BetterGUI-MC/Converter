@@ -1,6 +1,7 @@
-package me.hsgamer.bettergui.converter.menu;
+package me.hsgamer.bettergui.converter.menu.type;
 
 import me.hsgamer.bettergui.converter.item.ItemConverter;
+import me.hsgamer.bettergui.converter.menu.MenuConverter;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
