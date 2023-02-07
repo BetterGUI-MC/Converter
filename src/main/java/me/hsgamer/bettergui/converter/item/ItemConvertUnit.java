@@ -3,10 +3,10 @@ package me.hsgamer.bettergui.converter.item;
 import me.hsgamer.bettergui.converter.api.object.ConvertObject;
 import me.hsgamer.bettergui.converter.api.unit.ConvertUnit;
 import me.hsgamer.bettergui.converter.api.unit.SimpleConvertUnit;
+import me.hsgamer.bettergui.converter.util.StringUtil;
 import me.hsgamer.hscore.bukkit.item.ItemModifier;
 import me.hsgamer.hscore.bukkit.item.modifier.*;
 import me.hsgamer.hscore.common.CollectionUtils;
-import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -68,10 +68,6 @@ public class ItemConvertUnit extends SimpleConvertUnit {
         return units.stream().map(unit -> unit.createFromItem(itemStack)).collect(Collectors.toSet());
     }
 
-    private static String reverseColor(String string) {
-        return string.replace(String.valueOf(ChatColor.COLOR_CHAR), "&");
-    }
-
     public ConvertObject createFromItem(ItemStack itemStack) {
         return create(itemGetter.apply(itemStack));
     }
@@ -80,8 +76,8 @@ public class ItemConvertUnit extends SimpleConvertUnit {
         ID(new ItemConvertUnit(0, "id", fromModifier(MaterialModifier::new))),
         AMOUNT(new ItemConvertUnit(1, "amount", fromModifier(AmountModifier::new))),
         DURABILITY(new ItemConvertUnit(2, "durability", fromModifier(DurabilityModifier::new))),
-        DISPLAY_NAME(new ItemConvertUnit(3, "name", fromModifier(NameModifier::new).andThen(o -> reverseColor(String.valueOf(o))))),
-        LORE(new ItemConvertUnit(4, "lore", fromModifier(LoreModifier::new).andThen(o -> CollectionUtils.createStringListFromObject(o).stream().map(ItemConvertUnit::reverseColor).collect(Collectors.toList())))),
+        DISPLAY_NAME(new ItemConvertUnit(3, "name", fromModifier(NameModifier::new).andThen(o -> StringUtil.reverseColor(String.valueOf(o))))),
+        LORE(new ItemConvertUnit(4, "lore", fromModifier(LoreModifier::new).andThen(o -> CollectionUtils.createStringListFromObject(o).stream().map(StringUtil::reverseColor).collect(Collectors.toList())))),
         ITEM_FLAGS(new ItemConvertUnit(5, "flags", fromModifier(ItemFlagModifier::new).andThen(o -> {
             List<String> list = CollectionUtils.createStringListFromObject(o);
             boolean all = true;
