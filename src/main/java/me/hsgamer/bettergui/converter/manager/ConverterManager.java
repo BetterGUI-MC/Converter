@@ -4,7 +4,9 @@ import me.hsgamer.bettergui.converter.api.converter.ConverterType;
 import me.hsgamer.bettergui.converter.type.ChestCommands;
 import me.hsgamer.bettergui.converter.type.DeluxeMenus;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
@@ -36,5 +38,9 @@ public class ConverterManager {
 
     public static ConverterType getConverterType(String name) {
         return CONVERTER_TYPE_MAP.get(name);
+    }
+
+    public static List<String> getConverterTypeNames() {
+        return new ArrayList<>(CONVERTER_TYPE_MAP.keySet());
     }
 }
