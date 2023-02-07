@@ -69,6 +69,7 @@ public class ChestCommands implements ConverterType {
                     .map(item -> {
                         ItemConverter itemConverter = new ItemConverter();
                         itemConverter.add(item);
+                        itemConverter.addSlot(finalI);
                         return itemConverter;
                     })
                     .ifPresent(itemConverter -> simpleMenu.addItem(Integer.toString(finalI), itemConverter));
