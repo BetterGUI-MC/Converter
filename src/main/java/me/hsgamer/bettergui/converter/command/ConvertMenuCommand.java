@@ -28,7 +28,7 @@ public class ConvertMenuCommand extends Command {
 
     private static CompletableFuture<Void> convert(ConverterType converter, File convertedFolder, String name, Player player) {
         return CompletableFuture.runAsync(() -> {
-            File file = new File(convertedFolder, name + ".yml");
+            File file = new File(convertedFolder, name.toLowerCase().endsWith(".yml") ? name : name + ".yml");
             if (file.exists()) {
                 MessageUtils.sendMessage(player, "&cThe file already exists: " + file.getName());
                 return;

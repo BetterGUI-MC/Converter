@@ -5,7 +5,14 @@ import java.util.function.UnaryOperator;
 
 public class SimpleConvertUnit extends ConvertUnit {
     public SimpleConvertUnit(int priority, String key, UnaryOperator<Object> converter) {
-        super(priority, o -> Collections.singletonMap(key, converter.apply(o)));
+        super(priority, o -> {
+            Object value = converter.apply(o);
+            if (value == null) {
+                return Collections.emptyMap();
+            } else {
+                return Collections.singletonMap(key, value);
+            }
+        });
     }
 
     public SimpleConvertUnit(String key, UnaryOperator<Object> converter) {
