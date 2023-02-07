@@ -27,4 +27,20 @@
       <url>https://repo.codemc.io/repository/maven-public/</url>
     </repository>
   </repositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>me.filoghost.chestcommands</groupId>
+      <artifactId>chestcommands-plugin</artifactId>
+      <version>4.0.2</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.extendedclip</groupId>
+      <artifactId>DeluxeMenus</artifactId>
+      <version>1.13.6</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/libs/DeluxeMenus-1.13.6-Release.jar</systemPath>
+    </dependency>
+  </dependencies>
 </project>
