@@ -3,8 +3,8 @@ package me.hsgamer.bettergui.converter.api.unit;
 import java.util.Collections;
 import java.util.function.UnaryOperator;
 
-public class SimpleConvertUnit extends ConvertUnit {
-    public SimpleConvertUnit(int priority, String key, UnaryOperator<Object> converter) {
+public class SimpleConvertMapUnit extends ConvertMapUnit {
+    public SimpleConvertMapUnit(int priority, String key, UnaryOperator<Object> converter) {
         super(priority, o -> {
             Object value = converter.apply(o);
             if (value == null) {
@@ -15,15 +15,15 @@ public class SimpleConvertUnit extends ConvertUnit {
         });
     }
 
-    public SimpleConvertUnit(String key, UnaryOperator<Object> converter) {
+    public SimpleConvertMapUnit(String key, UnaryOperator<Object> converter) {
         this(Integer.MAX_VALUE, key, converter);
     }
 
-    public SimpleConvertUnit(int priority, String key) {
+    public SimpleConvertMapUnit(int priority, String key) {
         this(priority, key, o -> o);
     }
 
-    public SimpleConvertUnit(String key) {
+    public SimpleConvertMapUnit(String key) {
         this(Integer.MAX_VALUE, key);
     }
 }

@@ -2,13 +2,11 @@ package me.hsgamer.bettergui.converter.api.object;
 
 import me.hsgamer.bettergui.converter.api.unit.ConvertUnit;
 
-import java.util.Map;
-
-public class ConvertObject {
+public class ConvertObject<T> {
     private final Object object;
-    private final ConvertUnit unit;
+    private final ConvertUnit<T> unit;
 
-    public ConvertObject(Object object, ConvertUnit unit) {
+    public ConvertObject(Object object, ConvertUnit<T> unit) {
         this.object = object;
         this.unit = unit;
     }
@@ -17,11 +15,11 @@ public class ConvertObject {
         return object;
     }
 
-    public ConvertUnit getUnit() {
+    public ConvertUnit<T> getUnit() {
         return unit;
     }
 
-    public Map<String, Object> convert() {
+    public T convert() {
         return unit.getConverter().apply(object);
     }
 }

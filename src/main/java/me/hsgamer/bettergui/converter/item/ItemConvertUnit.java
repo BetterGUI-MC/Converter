@@ -1,8 +1,8 @@
 package me.hsgamer.bettergui.converter.item;
 
 import me.hsgamer.bettergui.converter.api.object.ConvertObject;
-import me.hsgamer.bettergui.converter.api.unit.ConvertUnit;
-import me.hsgamer.bettergui.converter.api.unit.SimpleConvertUnit;
+import me.hsgamer.bettergui.converter.api.unit.ConvertMapUnit;
+import me.hsgamer.bettergui.converter.api.unit.SimpleConvertMapUnit;
 import me.hsgamer.bettergui.converter.util.StringUtil;
 import me.hsgamer.hscore.bukkit.item.ItemModifier;
 import me.hsgamer.hscore.bukkit.item.modifier.*;
@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
-public class ItemConvertUnit extends SimpleConvertUnit {
+public class ItemConvertUnit extends SimpleConvertMapUnit {
     private final Function<ItemStack, Object> itemGetter;
 
     public ItemConvertUnit(int priority, String key, UnaryOperator<Object> converter, Function<ItemStack, Object> itemGetter) {
@@ -106,16 +106,16 @@ public class ItemConvertUnit extends SimpleConvertUnit {
     }
 
     public enum Extra {
-        SLOT(new SimpleConvertUnit("slot")),
-        NBT(new SimpleConvertUnit("nbt"));
+        SLOT(new SimpleConvertMapUnit("slot")),
+        NBT(new SimpleConvertMapUnit("nbt"));
 
-        private final ConvertUnit unit;
+        private final ConvertMapUnit unit;
 
-        Extra(ConvertUnit unit) {
+        Extra(ConvertMapUnit unit) {
             this.unit = unit;
         }
 
-        public ConvertUnit getUnit() {
+        public ConvertMapUnit getUnit() {
             return unit;
         }
     }
