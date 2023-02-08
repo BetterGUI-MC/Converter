@@ -3,10 +3,10 @@ package me.hsgamer.bettergui.converter.api.object;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TreeSet;
+import java.util.PriorityQueue;
 
 public class ConvertSet {
-    private final TreeSet<ConvertObject> convertObjectSet = new TreeSet<>(Comparator.comparingInt(o -> o.getUnit().getPriority()));
+    private final PriorityQueue<ConvertObject> convertObjectSet = new PriorityQueue<>(Comparator.comparingInt(o -> o.getUnit().getPriority()));
 
     public void add(ConvertObject convertObject) {
         convertObjectSet.add(convertObject);

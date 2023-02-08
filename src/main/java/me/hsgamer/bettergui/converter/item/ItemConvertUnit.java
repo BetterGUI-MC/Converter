@@ -107,8 +107,7 @@ public class ItemConvertUnit extends SimpleConvertUnit {
 
     public enum Extra {
         SLOT(new SimpleConvertUnit("slot")),
-        NBT(new SimpleConvertUnit("nbt"))
-        ;
+        NBT(new SimpleConvertUnit("nbt"));
 
         private final ConvertUnit unit;
 
