@@ -79,7 +79,7 @@ public class ChestCommands implements ConverterType {
         SimpleMenu simpleMenu = new SimpleMenu();
         MenuConverter menuConverter = simpleMenu.getMenu();
         menuConverter.add(MenuConvertUnit.TITLE.create(menu.getTitle()));
-        menuConverter.add(MenuConvertUnit.ROWS.create(menu.getRows()));
+        menuConverter.add(MenuConvertUnit.SLOTS.create(menu.getIcons().getSize()));
         menuConverter.add(MenuConvertUnit.PERMISSION.create(menu.getOpenPermission()));
         menuConverter.add(MenuConvertUnit.TICKS.create(menu.getRefreshTicks()));
         getOpenCommand(menu).ifPresent(s -> menuConverter.add(MenuConvertUnit.COMMAND.create(s)));
