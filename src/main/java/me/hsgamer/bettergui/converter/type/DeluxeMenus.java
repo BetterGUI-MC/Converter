@@ -2,6 +2,7 @@ package me.hsgamer.bettergui.converter.type;
 
 import com.extendedclip.deluxemenus.menu.Menu;
 import me.hsgamer.bettergui.converter.api.converter.ConverterType;
+import me.hsgamer.bettergui.converter.menu.MenuConvertUnit;
 import me.hsgamer.bettergui.converter.menu.MenuConverter;
 import me.hsgamer.bettergui.converter.menu.type.SimpleMenu;
 import org.bukkit.Bukkit;
@@ -37,7 +38,13 @@ public class DeluxeMenus implements ConverterType {
 
         SimpleMenu simpleMenu = new SimpleMenu();
         MenuConverter menuConverter = simpleMenu.getMenu();
-        // TODO: menu settings
+        menuConverter.add(MenuConvertUnit.TITLE.create(menu.getMenuTitle()));
+        menuConverter.add(MenuConvertUnit.SLOTS.create(menu.getSize()));
+        menuConverter.add(MenuConvertUnit.PERMISSION.create(menu.getPermission()));
+        menuConverter.add(MenuConvertUnit.TYPE.create(menu.getInventoryType().name()));
+        if (menu.registersCommand()) {
+            menuConverter.add(MenuConvertUnit.COMMAND.create(menu.getMenuCommands()));
+        }
 
         // TODO: menu items
 
