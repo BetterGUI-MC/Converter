@@ -29,11 +29,13 @@ public class ConvertMenuCommand extends Command {
     private static CompletableFuture<Void> convert(ConverterType converter, File convertedFolder, String name, Player player) {
         return CompletableFuture.runAsync(() -> {
             File file = new File(convertedFolder, name.toLowerCase().endsWith(".yml") ? name : name + ".yml");
+            if (file.exists()) {
+                file.delete();
+            }
             Optional<Map<String, Object>> optionalConverted = converter.convert(name, player);
             if (optionalConverted.isPresent()) {
                 BukkitConfig config = new BukkitConfig(file);
                 config.setup();
-                config.remove("");
                 optionalConverted.get().forEach(config::set);
                 config.save();
                 MessageUtils.sendMessage(player, "&aConverted: " + file.getName());
