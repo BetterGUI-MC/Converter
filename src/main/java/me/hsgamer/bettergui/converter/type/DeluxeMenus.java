@@ -44,7 +44,7 @@ public class DeluxeMenus implements ConverterType {
         menuConverter.add(MenuConvertUnit.TITLE.create(menu.getMenuTitle()));
         menuConverter.add(MenuConvertUnit.SLOTS.create(menu.getSize()));
         menuConverter.add(MenuConvertUnit.PERMISSION.create(menu.getPermission()));
-        menuConverter.add(MenuConvertUnit.TYPE.create(menu.getInventoryType().name()));
+        Optional.ofNullable(menu.getInventoryType()).ifPresent(type -> menuConverter.add(MenuConvertUnit.TYPE.create(type.name())));
         if (menu.registersCommand()) {
             menuConverter.add(MenuConvertUnit.COMMAND.create(menu.getMenuCommands()));
         }
