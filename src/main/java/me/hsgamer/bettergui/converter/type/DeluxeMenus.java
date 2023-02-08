@@ -1,12 +1,15 @@
 package me.hsgamer.bettergui.converter.type;
 
 import com.extendedclip.deluxemenus.menu.Menu;
+import com.extendedclip.deluxemenus.menu.MenuHolder;
 import me.hsgamer.bettergui.converter.api.converter.ConverterType;
+import me.hsgamer.bettergui.converter.item.ItemConverter;
 import me.hsgamer.bettergui.converter.menu.MenuConvertUnit;
 import me.hsgamer.bettergui.converter.menu.MenuConverter;
 import me.hsgamer.bettergui.converter.menu.type.SimpleMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -46,7 +49,19 @@ public class DeluxeMenus implements ConverterType {
             menuConverter.add(MenuConvertUnit.COMMAND.create(menu.getMenuCommands()));
         }
 
-        // TODO: menu items
+        MenuHolder menuHolder = new MenuHolder(player);
+        menu.getMenuItems().forEach((slot, priorityMap) -> {
+            priorityMap.forEach((priority, menuItem) -> {
+                ItemStack itemStack = menuItem.getItemStack(menuHolder);
+                if (itemStack == null) {
+                    return;
+                }
+                ItemConverter itemConverter = new ItemConverter();
+                itemConverter.add(itemStack);
+                itemConverter.addSlot(slot);
+                simpleMenu.addItem(slot + "-" + priority, itemConverter);
+            });
+        });
 
         return Optional.of(simpleMenu.toMap());
     }
