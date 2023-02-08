@@ -1,10 +1,12 @@
 package me.hsgamer.bettergui.converter.type;
 
+import me.filoghost.chestcommands.api.ConfigurableIcon;
 import me.filoghost.chestcommands.api.Icon;
 import me.filoghost.chestcommands.inventory.Grid;
 import me.filoghost.chestcommands.menu.InternalMenu;
 import me.filoghost.chestcommands.menu.MenuManager;
 import me.hsgamer.bettergui.converter.api.converter.ConverterType;
+import me.hsgamer.bettergui.converter.item.ItemConvertUnit;
 import me.hsgamer.bettergui.converter.item.ItemConverter;
 import me.hsgamer.bettergui.converter.menu.MenuConvertUnit;
 import me.hsgamer.bettergui.converter.menu.MenuConverter;
@@ -21,6 +23,28 @@ import java.util.Optional;
 public class ChestCommands implements ConverterType {
     public static boolean isAvailable() {
         return Bukkit.getPluginManager().isPluginEnabled("ChestCommands");
+    }
+
+    private static ItemConverter convert(Icon icon, Player player) {
+        ItemConverter converter = new ItemConverter();
+        if (icon instanceof ConfigurableIcon) {
+            ConfigurableIcon configurableIcon = (ConfigurableIcon) icon;
+            converter.add(ItemConvertUnit.Standard.ID.getUnit().create(configurableIcon.getMaterial().name()));
+            converter.add(ItemConvertUnit.Standard.AMOUNT.getUnit().create(configurableIcon.getAmount()));
+            converter.add(ItemConvertUnit.Standard.DURABILITY.getUnit().create(configurableIcon.getDurability()));
+            Optional.ofNullable(configurableIcon.getNBTData()).ifPresent(s -> converter.add(ItemConvertUnit.Extra.NBT.getUnit().create(s)));
+            Optional.ofNullable(configurableIcon.getName()).ifPresent(s -> converter.add(ItemConvertUnit.Standard.NAME.getUnit().create(s)));
+            Optional.ofNullable(configurableIcon.getLore()).ifPresent(s -> converter.add(ItemConvertUnit.Standard.LORE.getUnit().create(s)));
+            Optional.ofNullable(configurableIcon.getEnchantments()).ifPresent(map -> {
+                List<String> enchantments = new ArrayList<>();
+                map.forEach((enchantment, integer) -> enchantments.add(enchantment.getName() + ", " + integer));
+                converter.add(ItemConvertUnit.Standard.ENCHANT.getUnit().create(enchantments));
+            });
+            Optional.ofNullable(configurableIcon.getSkullOwner()).ifPresent(list -> converter.add(ItemConvertUnit.Standard.SKULL_OWNER.getUnit().create(list)));
+        } else {
+            converter.add(icon.render(player));
+        }
+        return converter;
     }
 
     private Optional<String> getOpenCommand(InternalMenu menu) {
@@ -65,10 +89,8 @@ public class ChestCommands implements ConverterType {
         for (int i = 0; i < size; i++) {
             int finalI = i;
             Optional.ofNullable(grid.getByIndex(i))
-                    .map(icon -> icon.render(player))
-                    .map(item -> {
-                        ItemConverter itemConverter = new ItemConverter();
-                        itemConverter.add(item);
+                    .map(icon -> convert(icon, player))
+                    .map(itemConverter -> {
                         itemConverter.addSlot(finalI);
                         return itemConverter;
                     })

@@ -74,11 +74,11 @@ public class ItemConvertUnit extends SimpleConvertUnit {
 
     public enum Standard {
         ID(new ItemConvertUnit(0, "id", fromModifier(MaterialModifier::new))),
-        AMOUNT(new ItemConvertUnit(1, "amount", fromModifier(AmountModifier::new))),
+        AMOUNT(new ItemConvertUnit(2, "amount", fromModifier(AmountModifier::new))),
         DURABILITY(new ItemConvertUnit(2, "durability", fromModifier(DurabilityModifier::new))),
-        DISPLAY_NAME(new ItemConvertUnit(3, "name", fromModifier(NameModifier::new).andThen(o -> StringUtil.reverseColor(String.valueOf(o))))),
-        LORE(new ItemConvertUnit(4, "lore", fromModifier(LoreModifier::new).andThen(o -> CollectionUtils.createStringListFromObject(o).stream().map(StringUtil::reverseColor).collect(Collectors.toList())))),
-        ITEM_FLAGS(new ItemConvertUnit(5, "flags", fromModifier(ItemFlagModifier::new).andThen(o -> {
+        NAME(new ItemConvertUnit(2, "name", fromModifier(NameModifier::new).andThen(o -> StringUtil.reverseColor(String.valueOf(o))))),
+        LORE(new ItemConvertUnit(2, "lore", fromModifier(LoreModifier::new).andThen(o -> CollectionUtils.createStringListFromObject(o).stream().map(StringUtil::reverseColor).collect(Collectors.toList())))),
+        ITEM_FLAGS(new ItemConvertUnit(3, "flags", fromModifier(ItemFlagModifier::new).andThen(o -> {
             List<String> list = CollectionUtils.createStringListFromObject(o);
             boolean all = true;
             for (ItemFlag flag : ItemFlag.values()) {
@@ -89,9 +89,9 @@ public class ItemConvertUnit extends SimpleConvertUnit {
             }
             return all ? "ALL" : o;
         }))),
-        SKULL_OWNER(new ItemConvertUnit(6, "skull-owner", fromModifier(SkullModifier::new))),
-        ENCHANT(new ItemConvertUnit(7, "enchant", fromModifier(EnchantmentModifier::new))),
-        POTION_EFFECT(new ItemConvertUnit(8, "potion", fromModifier(PotionEffectModifier::new))),
+        SKULL_OWNER(new ItemConvertUnit(3, "skull-owner", fromModifier(SkullModifier::new))),
+        ENCHANT(new ItemConvertUnit(3, "enchant", fromModifier(EnchantmentModifier::new))),
+        POTION_EFFECT(new ItemConvertUnit(3, "potion", fromModifier(PotionEffectModifier::new))),
         ;
 
         private final ItemConvertUnit unit;
@@ -106,7 +106,9 @@ public class ItemConvertUnit extends SimpleConvertUnit {
     }
 
     public enum Extra {
-        SLOT(new SimpleConvertUnit("slot"));
+        SLOT(new SimpleConvertUnit("slot")),
+        NBT(new SimpleConvertUnit("nbt"))
+        ;
 
         private final ConvertUnit unit;
 
