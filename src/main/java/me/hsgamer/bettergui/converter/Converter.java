@@ -7,6 +7,6 @@ import me.hsgamer.hscore.bukkit.addon.PluginAddon;
 public final class Converter extends PluginAddon {
     @Override
     public void onEnable() {
-        BetterGUI.getInstance().getCommandManager().register(new ConvertMenuCommand());
+        BetterGUI.getInstance().getCommandManager().register(new ConvertMenuCommand(this));
     }
 }

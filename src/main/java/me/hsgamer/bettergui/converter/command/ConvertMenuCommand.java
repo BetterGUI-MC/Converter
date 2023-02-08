@@ -1,6 +1,7 @@
 package me.hsgamer.bettergui.converter.command;
 
 import me.hsgamer.bettergui.BetterGUI;
+import me.hsgamer.bettergui.converter.Converter;
 import me.hsgamer.bettergui.converter.api.converter.ConverterType;
 import me.hsgamer.bettergui.converter.manager.ConverterManager;
 import me.hsgamer.hscore.bukkit.config.BukkitConfig;
@@ -20,9 +21,11 @@ import java.util.concurrent.CompletableFuture;
 
 public class ConvertMenuCommand extends Command {
     private static final Permission PERMISSION = new Permission("bettergui.convertmenu", "Convert a menu from another plugin", PermissionDefault.OP);
+    private final Converter addon;
 
-    public ConvertMenuCommand() {
+    public ConvertMenuCommand(Converter addon) {
         super("convertmenu", "Convert a menu from another plugin", "/convertmenu <plugin> [menu]", Collections.singletonList("cm"));
+        this.addon = addon;
         setPermission(PERMISSION.getName());
     }
 
@@ -64,8 +67,7 @@ public class ConvertMenuCommand extends Command {
             return false;
         }
         MessageUtils.sendMessage(sender, "&aConverting...");
-        File menuFolder = new File(BetterGUI.getInstance().getDataFolder(), "menu");
-        File convertedFolder = new File(menuFolder, converter.getName());
+        File convertedFolder = new File(addon.getDataFolder(), converter.getName());
         if (!convertedFolder.exists()) {
             convertedFolder.mkdirs();
             MessageUtils.sendMessage(sender, "&aCreated folder: " + convertedFolder.getName());
