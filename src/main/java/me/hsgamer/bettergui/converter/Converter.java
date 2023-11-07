@@ -2,9 +2,10 @@ package me.hsgamer.bettergui.converter;
 
 import me.hsgamer.bettergui.BetterGUI;
 import me.hsgamer.bettergui.converter.command.ConvertMenuCommand;
-import me.hsgamer.hscore.bukkit.addon.PluginAddon;
+import me.hsgamer.hscore.expansion.common.Expansion;
+import me.hsgamer.hscore.expansion.extra.expansion.DataFolder;
 
-public final class Converter extends PluginAddon {
+public final class Converter implements Expansion, DataFolder {
     @Override
     public void onEnable() {
         BetterGUI.getInstance().getCommandManager().register(new ConvertMenuCommand(this));

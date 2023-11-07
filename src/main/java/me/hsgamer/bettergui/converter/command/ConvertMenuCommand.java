@@ -6,6 +6,7 @@ import me.hsgamer.bettergui.converter.api.converter.ConverterType;
 import me.hsgamer.bettergui.converter.manager.ConverterManager;
 import me.hsgamer.hscore.bukkit.config.BukkitConfig;
 import me.hsgamer.hscore.bukkit.utils.MessageUtils;
+import me.hsgamer.hscore.config.PathString;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -39,7 +40,7 @@ public class ConvertMenuCommand extends Command {
             if (optionalConverted.isPresent()) {
                 BukkitConfig config = new BukkitConfig(file);
                 config.setup();
-                optionalConverted.get().forEach(config::set);
+                optionalConverted.get().forEach((k, v) -> config.set(new PathString(k), v));
                 config.save();
                 MessageUtils.sendMessage(player, "&aConverted: " + file.getName());
             } else {
@@ -54,7 +55,7 @@ public class ConvertMenuCommand extends Command {
             return false;
         }
         if (!(sender instanceof Player)) {
-            MessageUtils.sendMessage(sender, BetterGUI.getInstance().getMessageConfig().playerOnly);
+            MessageUtils.sendMessage(sender, BetterGUI.getInstance().getMessageConfig().getPlayerOnly());
             return false;
         }
         if (args.length < 1) {

@@ -4,9 +4,9 @@ import me.hsgamer.bettergui.converter.api.object.ConvertObject;
 import me.hsgamer.bettergui.converter.api.unit.ConvertMapUnit;
 import me.hsgamer.bettergui.converter.api.unit.SimpleConvertMapUnit;
 import me.hsgamer.bettergui.converter.util.StringUtil;
-import me.hsgamer.hscore.bukkit.item.ItemModifier;
 import me.hsgamer.hscore.bukkit.item.modifier.*;
 import me.hsgamer.hscore.common.CollectionUtils;
+import me.hsgamer.hscore.minecraft.item.ItemModifier;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -53,11 +53,10 @@ public class ItemConvertUnit extends SimpleConvertMapUnit {
         return fromItemMeta(itemMeta -> itemMetaClass.isInstance(itemMeta) ? itemMetaGetter.apply(itemMetaClass.cast(itemMeta)) : null);
     }
 
-    public static Function<ItemStack, Object> fromModifier(Supplier<ItemModifier> itemModifierSupplier) {
+    public static Function<ItemStack, Object> fromModifier(Supplier<ItemModifier<ItemStack>> itemModifierSupplier) {
         return itemStack -> {
-            ItemModifier itemModifier = itemModifierSupplier.get();
-            if (!itemModifier.canLoadFromItemStack(itemStack)) return null;
-            itemModifier.loadFromItemStack(itemStack);
+            ItemModifier<ItemStack> itemModifier = itemModifierSupplier.get();
+            if (!itemModifier.loadFromItem(itemStack)) return null;
             return itemModifier.toObject();
         };
     }
