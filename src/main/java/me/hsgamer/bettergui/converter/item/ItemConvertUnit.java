@@ -4,6 +4,7 @@ import me.hsgamer.bettergui.converter.api.object.ConvertObject;
 import me.hsgamer.bettergui.converter.api.unit.ConvertMapUnit;
 import me.hsgamer.bettergui.converter.api.unit.SimpleConvertMapUnit;
 import me.hsgamer.bettergui.converter.util.StringUtil;
+import me.hsgamer.bettergui.modifier.SkullModifier;
 import me.hsgamer.hscore.bukkit.item.modifier.*;
 import me.hsgamer.hscore.common.CollectionUtils;
 import me.hsgamer.hscore.minecraft.item.ItemModifier;
