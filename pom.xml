@@ -38,9 +38,9 @@
     <dependency>
       <groupId>com.extendedclip</groupId>
       <artifactId>DeluxeMenus</artifactId>
-      <version>1.13.6</version>
+      <version>1.14.0</version>
       <scope>system</scope>
-      <systemPath>${project.basedir}/libs/DeluxeMenus-1.13.6-Release.jar</systemPath>
+      <systemPath>${project.basedir}/libs/DeluxeMenus-1.14.0-Release.jar</systemPath>
     </dependency>
   </dependencies>
 </project>
